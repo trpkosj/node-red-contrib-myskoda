@@ -4,10 +4,6 @@
         color: '#4aa82e',
         defaults: {
             name: {value:""},
-            apiType:{
-                value: "skodaDefault",
-                required: true
-            },
             queryParking:{
                 value: false,
                 required: false
@@ -20,12 +16,11 @@
                 value: false,
                 required: false
             },
-            queryTimer:{
+            queryMaintenance:{
                 value: false,
                 required: false
             },
         },
-        
         inputs:1,
         outputs:1,
         icon: "arrow-in.svg",
@@ -35,25 +30,8 @@
         credentials: {
             email: { type: "text" },
             password: { type: "password" }
-        },
-        oneditprepare: function(){
-            if($('#node-input-apiType').val() == 'enyaq'){ //'.val()'
-                $('.skodaOptions').hide();
-            }
-
-            $('#node-input-apiType').change(function(){
-                if($(this).val() == 'enyaq'){ 
-                    $('.skodaOptions').hide();
-                    return true;
-                }
-                $('.skodaOptions').show();
-            });
         }
     });
-   
-        
-    
-    
 </script>
 
 <script type="text/x-red" data-template-name="skoda-get">
@@ -69,34 +47,27 @@
         <label for="node-input-password"><i class="icon-tag"></i> Password</label>
         <input type="password" id="node-input-password">
     </div>
-    <div class="form-row">
-        <label for="node-input-apiType"><i class="icon-tag"></i> Car</label>
-        <select id="node-input-apiType">
-            <option value="skodaDefault">Default</option>
-            <option value="enyaq">Enyaq</option>
-          </select>
-    </div>
 
-    <div class="form-row skodaOptions">
-        <label for="node-input-queryParking"><i class="icon-tag"></i> Query parking information</label>
+    <div class="form-row">
+        <label for="node-input-queryParking"><i class="icon-tag"></i> Query parking position</label>
         <input type="checkbox" id="node-input-queryParking">
     </div>
-    <div class="form-row skodaOptions">
-        <label for="node-input-queryClimater"><i class="icon-tag"></i> Query climatisation information</label>
+    <div class="form-row">
+        <label for="node-input-queryClimater"><i class="icon-tag"></i> Query air conditioning</label>
         <input type="checkbox" id="node-input-queryClimater">
     </div>
-    <div class="form-row skodaOptions">
-        <label for="node-input-queryCharger"><i class="icon-tag"></i> Query charger information</label>
+    <div class="form-row">
+        <label for="node-input-queryCharger"><i class="icon-tag"></i> Query charging information</label>
         <input type="checkbox" id="node-input-queryCharger">
     </div>
-    <div class="form-row skodaOptions">
-        <label for="node-input-queryTimer"><i class="icon-tag"></i> Query timer information</label>
-        <input type="checkbox" id="node-input-queryTimer">
+    <div class="form-row">
+        <label for="node-input-queryMaintenance"><i class="icon-tag"></i> Query maintenance information</label>
+        <input type="checkbox" id="node-input-queryMaintenance">
     </div>
 </script>
 
 <script type="text/x-red" data-help-name="skoda-get">
-    <p>A node to log in to Skoda connect service and get cars data</p>
+    <p>A node to log in to MySkoda service and get vehicle data</p>
 
     <h3>Configuration</h3>
     <dl class="message-properties">
@@ -104,36 +75,32 @@
         <dd>name of node</dd>
 
         <dt class="required">Email<span class="property-type">string</span></dt>
-        <dd>Email of Skoda-Connect account</dd>
+        <dd>Email of your MySkoda account</dd>
 
-        <dt class="required">Car<span class="property-type">string</span></dt>
-        <dd>All Skoda Cars work with the default settings. Only Enyaq uses a special API</dd>
+        <dt class="required">Password<span class="property-type">string</span></dt>
+        <dd>Password of your MySkoda account</dd>
 
-        <dt class="required">Command<span class="property-type">object</span></dt>
-        <dd>Choose a command from the list</dd>
+        <dt class="optional">Query parking position<span class="property-type">boolean</span></dt>
+        <dd>include last known parking position</dd>
 
-        <dt class="optional">Query parking information<span class="property-type">boolean</span></dt>
-        <dd>query parking information only if available for your car!</dd>
+        <dt class="optional">Query air conditioning<span class="property-type">boolean</span></dt>
+        <dd>include air conditioning status</dd>
 
-        <dt class="optional">Query climater information<span class="property-type">boolean</span></dt>
-        <dd>query climater information only if available for your car!</dd>
+        <dt class="optional">Query charging information<span class="property-type">boolean</span></dt>
+        <dd>include charging status (EV/PHEV only)</dd>
 
-        <dt class="optional">Query charger information<span class="property-type">boolean</span></dt>
-        <dd>query charging information only if available for your car!</dd>
-
-        <dt class="optional">Query timer information<span class="property-type">boolean</span></dt>
-        <dd>query timer information only if available for your car!</dd>
+        <dt class="optional">Query maintenance information<span class="property-type">boolean</span></dt>
+        <dd>include maintenance report</dd>
     </dl>
     <h3>Inputs</h3>
-    <p>Input only used for triggering</p>
+    <p>Any input triggers the API call</p>
 
     <h3>Output</h3>
-    <p>json object with various information of all cars configured in Skoda connect</p>
-
+    <p>JSON object with vehicle info, status, driving range, and optional data for all cars in your MySkoda account</p>
 
     <h3>References</h3>
         <ul>
-            <li><a href="https://www.skoda-connect.com/">Skoda connect</a> </li>
+            <li><a href="https://www.myskoda.com/">MySkoda</a></li>
             <li><a href="https://github.com/MartinGris/node-red-contrib-skoda-connect">GitHub</a> - the nodes github repository</li>
         </ul>
 </script>

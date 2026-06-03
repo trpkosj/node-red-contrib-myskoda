@@ -3,69 +3,105 @@
 
 [![NPM version](http://img.shields.io/npm/v/node-red-contrib-skoda-connect.svg)](https://www.npmjs.com/package/node-red-contrib-skoda-connect)
 [![Downloads](https://img.shields.io/npm/dm/node-red-contrib-skoda-connect.svg)](https://www.npmjs.com/package/node-red-contrib-skoda-connect)
-[![Dependency Status](https://img.shields.io/david/MartinGris/node-red-contrib-skoda-connect.svg)](https://david-dm.org/MartinGris/node-red-contrib-skoda-connect)
 
 [![NPM](https://nodei.co/npm/node-red-contrib-skoda-connect.png?compact=true)](https://nodei.co/npm/node-red-contrib-skoda-connect/)
 
-## skoda-connect node for node-red
+## MySkoda nodes for Node-RED
 
-simple nodes for getting car information from skoda connect platform and call functions you know from the skoda connect app
+Simple nodes for getting car information from the **MySkoda** platform and sending remote commands to your vehicle.
 
+> **v2.0.0** - Complete rewrite using the new MySkoda API (replaces the legacy Skoda Connect / VW Group API that stopped working). All Skoda vehicles supported by the MySkoda app are compatible.
 
-## Usage skoda-get node
+## Requirements
 
-You need a Skoda connect account. In the node enter mail and password. any input triggers the api call. Ouput is a json object with information of each car.
-There are some optional APIs which can be called depending on the configuration of your car. Select it only if available for your car.
+- Node.js >= 16
+- A MySkoda account (the same credentials you use in the MySkoda mobile app)
+- Your vehicle must be visible and functional in the MySkoda app
 
-## Usage skoda-set node
+## Installation
 
-You need a Skoda connect account. In the node enter mail and password. Currently two functions can be selected in the dropdown. Each function needs a different payload.
-For setting the target temperature of the climater pass the value as double in the payload field. For switching the climater on or off pass a boolean in the payload field. Both functions need a VIN number (string).
-```js
-	{
-	"payload": <TEMPERATURE>,
-	"vin": "<VIN>"
-	}
-```
-or
-
-```js
-	{
-	"payload": <true/false>,
-	"vin": "<VIN>"
-	}
+```bash
+cd ~/.node-red
+npm install node-red-contrib-skoda-connect
 ```
 
-The second output of the skoda-set node is used for the ActionState query. It can be configured to query the state of the currently sent action a couple of times in a defined period.
+## Usage: skoda-get node
 
-## ActionState Explanation
+Enter your MySkoda email and password. Any input triggers the API call. Output is a JSON object with information for each vehicle in your account.
 
-  -   queued
-  -   fetched
-  -   delayed
-  -   unfetched
-  -   cancelled
-  -   succeeded
-  -   failed
-  -   error
-  -   succeededDelayed
-  -   failedDelayed
+**Always returned:**
+- Vehicle info (model, nickname, connectivity generation)
+- Vehicle status (doors, windows, lights, odometer)
+- Driving range (fuel level, battery SoC, estimated range)
 
-## Status fields Explanation
+**Optional (select in node config):**
+- Parking position
+- Air conditioning status
+- Charging information (EV/PHEV)
+- Maintenance report
 
-Door and window states:
+### Example output
 
--   open: 1
--   locked: 2
--   closed: 3
+```json
+{
+  "vehicles": [
+    {
+      "vin": "TMBJXXXXXXXXXXXXXXX",
+      "info": { ... },
+      "status": { ... },
+      "drivingRange": { ... },
+      "positions": { ... },
+      "airConditioning": { ... },
+      "charging": { ... },
+      "maintenance": { ... }
+    }
+  ]
+}
+```
+
+## Usage: skoda-set node
+
+Enter your MySkoda email and password. Select a command from the dropdown. Each command requires `msg.vin` with the vehicle VIN.
+
+### Available commands
+
+| Command | msg.payload | Other required fields |
+|---------|-------------|----------------------|
+| Start Air Conditioning | - | - |
+| Stop Air Conditioning | - | - |
+| Set Target Temperature | number (Celsius, e.g. 21.5) | - |
+| Start Window Heating | - | - |
+| Stop Window Heating | - | - |
+| Start Charging | - | - |
+| Stop Charging | - | - |
+| Set Charge Limit | number (%, e.g. 80) | - |
+| Lock Vehicle | - | msg.spin (S-PIN) |
+| Unlock Vehicle | - | msg.spin (S-PIN) |
+| Honk and Flash | - | msg.latitude, msg.longitude |
+| Flash | - | msg.latitude, msg.longitude |
+| Wake Up Vehicle | - | - |
+
+### Example input
+
+```json
+{
+  "vin": "TMBJXXXXXXXXXXXXXXX",
+  "payload": 22
+}
+```
 
 ## Credits
-Thanks to [TA2k](https://github.com/TA2k) for [ioBroker.vw-connect](https://github.com/TA2k/ioBroker.vw-connect) and [DBa2016](https://github.com/DBa2016) for [sc2mqtt](https://github.com/DBa2016/sc2mqtt).
-My code based heavily on there scripts
+
+- Thanks to [skodaconnect/myskoda](https://github.com/skodaconnect/myskoda) for reverse-engineering the new MySkoda API
+- Thanks to [TA2k](https://github.com/TA2k) for [ioBroker.vw-connect](https://github.com/TA2k/ioBroker.vw-connect) (original inspiration)
+
+## Disclaimer
+
+This is an unofficial integration. The MySkoda API is not publicly documented and may change without notice. Use at your own risk.
 
 ## Buy me a beer
+
 Find it useful? Please consider buying me or other contributors a beer.
 
 <a href="https://www.buymeacoffee.com/MartinGri" target="_blank"><img src="https://www.buymeacoffee.com/assets/img/custom_images/orange_img.png" alt="Buy Me A Beer" style="height: 41px !important;width: 174px !important;box-shadow: 0px 3px 2px 0px rgba(190, 190, 190, 0.5) !important;-webkit-box-shadow: 0px 3px 2px 0px rgba(190, 190, 190, 0.5) !important;" ></a>
-
 

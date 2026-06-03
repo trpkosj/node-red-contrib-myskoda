@@ -5,33 +5,12 @@
         defaults: {
             name: {value:""},
             command:{
-                value: "",
+                value: "startAC",
                 required: true
-            },
-            queryActionResult:{
-                value: "",
-                required: true
-            },
-            queryCount:{
-                value: "",
-                required: false,
-                validate:function(queryCountEntered){
-                    var queryActionResultActive = $("#node-input-queryActionResult").prop("checked");
-                    return queryActionResultActive == false || queryCountEntered >= 1 && queryCountEntered <= 5;
-                }
-            },
-            refreshPeriod:{
-                value: "",
-                required: false,
-                validate:function(periodEntered){
-                    var queryActionResultActive = $("#node-input-queryActionResult").prop("checked");
-                    var min = 500;
-                    return queryActionResultActive == false || periodEntered >= min;
-                }
             },
         },
         inputs:1,
-        outputs:2,
+        outputs:1,
         icon: "arrow-in.svg",
         label: function() {
             return this.name||"skoda-set";
@@ -39,58 +18,8 @@
         credentials: {
             email: { type: "text" },
             password: { type: "password" }
-        },
-        oneditprepare: function() {
-
-            function updateDocumentation(value){
-                if(value == "temperature"){
-                    $('#dtHelpClimater').hide();
-                    $('#ddHelpClimater').hide();
-                    $('#dtHelpTemperature').show();
-                    $('#ddHelpTemperature').show();
-                }
-                else if(value == "climater"){
-                    $('#dtHelpClimater').show();
-                    $('#ddHelpClimater').show();
-                    $('#dtHelpTemperature').hide();
-                    $('#ddHelpTemperature').hide();
-                }
-            }
-
-            function updateActionQueryOptions(show){
-                console.log("show: " + show);
-                if(show == true){
-                    $('#queryCountDiv').show();
-                    $('#periodDiv').show();
-                }
-                else{
-                    $('#queryCountDiv').hide();
-                    $('#periodDiv').hide();
-                }
-            }
-
-            var node = this;
-            $('#dtHelpTemperature').ready(function() {
-                setTimeout(function(){
-                    updateDocumentation(node.command);
-                    updateActionQueryOptions(node.queryActionResult);
-                }, 500);
-               
-            });
-            $('#node-input-command').on('change', function(type, value) {
-                var val = $(this).val();
-                updateDocumentation(val);
-            });
-
-            $('#node-input-queryActionResult').on('change', function(type, value) {
-                var val = $(this).prop("checked");
-                updateActionQueryOptions(val);
-            });
-        },
-
+        }
     });
-
-
 </script>
 
 <script type="text/x-red" data-template-name="skoda-set">
@@ -99,42 +28,35 @@
         <input type="text" id="node-input-name" placeholder="Name">
     </div>
     <div class="form-row">
-        <label for="node-input-email"><i class="icon-tag"></i>Email</label>
+        <label for="node-input-email"><i class="icon-tag"></i> Email</label>
         <input type="text" id="node-input-email">
     </div>
     <div class="form-row">
-        <label for="node-input-password"><i class="icon-tag"></i>Password</label>
+        <label for="node-input-password"><i class="icon-tag"></i> Password</label>
         <input type="password" id="node-input-password">
     </div>
     <div class="form-row">
-        <label for="node-input-command"><i class="icon-tag"></i>Command</label>
+        <label for="node-input-command"><i class="icon-tag"></i> Command</label>
         <select id="node-input-command">
-            <option value="temperature">Set Climater Temperature</option>
-            <option value="climater">Switch Climater on/off</option>
+            <option value="startAC">Start Air Conditioning</option>
+            <option value="stopAC">Stop Air Conditioning</option>
+            <option value="temperature">Set Target Temperature</option>
+            <option value="startWindowHeating">Start Window Heating</option>
+            <option value="stopWindowHeating">Stop Window Heating</option>
+            <option value="startCharging">Start Charging</option>
+            <option value="stopCharging">Stop Charging</option>
+            <option value="setChargeLimit">Set Charge Limit</option>
+            <option value="lock">Lock Vehicle</option>
+            <option value="unlock">Unlock Vehicle</option>
+            <option value="honkAndFlash">Honk and Flash</option>
+            <option value="flash">Flash</option>
+            <option value="wakeup">Wake Up Vehicle</option>
         </select>
-    </div>
-    <div class="form-row">
-        <label for="node-input-queryActionResult"><i class="icon-tag"></i> Query Action result</label>
-        <input type="checkbox" id="node-input-queryActionResult">
-    </div>
-    <div class="form-row" id="queryCountDiv">
-        <label for="node-input-queryCount"><i class="icon-tag"></i> Number of queries</label>
-        <select id="node-input-queryCount">
-            <option>1</option>
-            <option>2</option>
-            <option>3</option>
-            <option>4</option>
-            <option>5</option>
-        </select>
-    </div>
-    <div class="form-row" id="periodDiv">
-        <label for="node-input-refreshPeriod"><i class="icon-tag"></i>Query period (ms)</label>
-        <input type="number" min="500" id="node-input-refreshPeriod">
     </div>
 </script>
 
 <script type="text/x-red" data-help-name="skoda-set">
-    <p>A node to log in to Skoda connect service and call various functions</p>
+    <p>A node to log in to MySkoda and send commands to your vehicle</p>
 
     <h3>Configuration</h3>
     <dl class="message-properties">
@@ -142,44 +64,40 @@
         <dd>name of node</dd>
 
         <dt class="required">Email<span class="property-type">string</span></dt>
-        <dd>Email of Skoda-Connect account</dd>
+        <dd>Email of your MySkoda account</dd>
 
-        <dt class="required">Command<span class="property-type">object</span></dt>
+        <dt class="required">Password<span class="property-type">string</span></dt>
+        <dd>Password of your MySkoda account</dd>
+
+        <dt class="required">Command<span class="property-type">string</span></dt>
         <dd>Choose a command from the list</dd>
-
-        <dt class="required">Query Action result<span class="property-type">boolean</span></dt>
-        <dd>if checked the result of the command can be queried. The default state after the command is fired is 'queued'</dd>
-
-        <dt class="optional">Number of queries<span class="property-type">int</span></dt>
-        <dd>the number of queries after the command is fired.</dd>
-
-        <dt class="optional">Query period<span class="property-type">int</span></dt>
-        <dd>the triggerperiod used for querying the action state after the command is fired in milliseconds</dd>
     </dl>
 
     <h3>Inputs</h3>
     <dl class="message-properties">
-        <dt id="dtHelpClimater" style="display: none;" class="required">msg.payload<span class="property-type">boolean</span></dt>
-        <dd id="ddHelpClimater" style="display: none;">true/false to switch the climater on or off</dd>
-        
-        <dt id="dtHelpTemperature" style="display: none;" class="required">msg.payload<span class="property-type">double</span></dt>
-        <dd id="ddHelpTemperature" style="display: none;">The target temperature for the climater</dd>
+        <dt class="required">msg.vin<span class="property-type">string</span></dt>
+        <dd>VIN number of car. Use the skoda-get node to query it.</dd>
 
-        <dt class="required">msg.vin <span class="property-type">string</span></dt>
-        <dd>VIN number of car. Use the skoda-get node for querying it</dd>
+        <dt class="optional">msg.payload<span class="property-type">number</span></dt>
+        <dd>For "Set Target Temperature": temperature in Celsius (e.g. 21.5)<br/>
+            For "Set Charge Limit": limit in percent (e.g. 80)</dd>
+
+        <dt class="optional">msg.spin<span class="property-type">string</span></dt>
+        <dd>Required for Lock/Unlock commands (your S-PIN)</dd>
+
+        <dt class="optional">msg.latitude / msg.longitude<span class="property-type">number</span></dt>
+        <dd>Required for Honk and Flash / Flash commands (vehicle position)</dd>
     </dl>
+
     <h3>Output</h3>
     <dl class="message-properties">
         <dt class="required">msg.payload<span class="property-type">object</span></dt>
-        <dd>Output 1.: action object</dd>
-
-        <dt class="required">msg.payload<span class="property-type">object</span></dt>
-        <dd>Output 2.: action object status update</dd>
+        <dd>API response or {success: true}</dd>
     </dl>
 
     <h3>References</h3>
         <ul>
-            <li><a href="https://www.skoda-connect.com/">Skoda connect</a> </li>
+            <li><a href="https://www.myskoda.com/">MySkoda</a></li>
             <li><a href="https://github.com/MartinGris/node-red-contrib-skoda-connect">GitHub</a> - the nodes github repository</li>
         </ul>
 </script>
