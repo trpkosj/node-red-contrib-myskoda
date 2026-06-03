@@ -1,10 +1,10 @@
 
 # node-red-contrib-skoda-connect
 
-[![NPM version](http://img.shields.io/npm/v/node-red-contrib-skoda-connect.svg)](https://www.npmjs.com/package/node-red-contrib-skoda-connect)
-[![Downloads](https://img.shields.io/npm/dm/node-red-contrib-skoda-connect.svg)](https://www.npmjs.com/package/node-red-contrib-skoda-connect)
+[![NPM version](http://img.shields.io/npm/v/node-red-contrib-myskoda.svg)](https://www.npmjs.com/package/node-red-contrib-myskoda)
+[![Downloads](https://img.shields.io/npm/dm/node-red-contrib-myskoda.svg)](https://www.npmjs.com/package/node-red-contrib-myskoda)
 
-[![NPM](https://nodei.co/npm/node-red-contrib-skoda-connect.png?compact=true)](https://nodei.co/npm/node-red-contrib-skoda-connect/)
+
 
 ## MySkoda nodes for Node-RED
 
