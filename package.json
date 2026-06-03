@@ -6,9 +6,9 @@
     "license": "BSD-3-Clause",
     "repository": {
         "type": "git",
-        "url": "git+https://github.com/trpkosj/node-red-contrib-skoda-connect.git"
+        "url": "git+https://github.com/trpkosj/node-red-contrib-myskoda.git"
     },
-    "homepage": "https://github.com/trpkosj/node-red-contrib-skoda-connect",
+    "homepage": "https://github.com/trpkosj/node-red-contrib-myskoda",
     "keywords": [
         "node-red",
         "skoda",
