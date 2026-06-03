@@ -93,7 +93,7 @@ Enter your MySkoda email and password. Select a command from the dropdown. Each 
 ## Credits
 
 - Thanks to [skodaconnect/myskoda](https://github.com/skodaconnect/myskoda) for reverse-engineering the new MySkoda API
-- Thanks to [TA2k](https://github.com/TA2k) for [ioBroker.vw-connect](https://github.com/TA2k/ioBroker.vw-connect) (original inspiration)
+- Thanks to Martin Gris for original inspiration
 
 ## Disclaimer
 
