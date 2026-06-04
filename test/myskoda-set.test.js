@@ -44,7 +44,7 @@ const nodeTypes = [myskodaSetNode, myskodaCredentialsNode];
 function makeFlow(command) {
     return [
         credConfigNode,
-        { id: 'n1', type: 'myskoda-set', name: 'test set', credentials: 'cred1', command, wires: [['n2']] },
+        { id: 'n1', type: 'myskoda-set', name: 'test set', account: 'cred1', command, wires: [['n2']] },
         { id: 'n2', type: 'helper' },
     ];
 }
@@ -73,7 +73,7 @@ describe('myskoda-set node', () => {
     // ── Loading ──────────────────────────────────────────────────────────────
 
     it('should be loaded with startAC command', (done) => {
-        const flow = [credConfigNode, { id: 'n1', type: 'myskoda-set', name: 'test set', credentials: 'cred1', command: 'startAC' }];
+        const flow = [credConfigNode, { id: 'n1', type: 'myskoda-set', name: 'test set', account: 'cred1', command: 'startAC' }];
         helper.load(nodeTypes, flow, defaultCredentials, () => {
             const n1 = helper.getNode('n1');
             expect(n1).toBeTruthy();
@@ -83,7 +83,7 @@ describe('myskoda-set node', () => {
     });
 
     it('should be loaded with lock command', (done) => {
-        const flow = [credConfigNode, { id: 'n1', type: 'myskoda-set', name: 'lock node', credentials: 'cred1', command: 'lock' }];
+        const flow = [credConfigNode, { id: 'n1', type: 'myskoda-set', name: 'lock node', account: 'cred1', command: 'lock' }];
         helper.load(nodeTypes, flow, defaultCredentials, () => {
             const n1 = helper.getNode('n1');
             expect(n1).toBeTruthy();
@@ -474,7 +474,7 @@ describe('myskoda-set node', () => {
 
         const flow = [
             credConfigNode,
-            { id: 'n1', type: 'myskoda-set', name: 'test set', credentials: 'cred1', command: 'doesNotExist', wires: [['n2']] },
+            { id: 'n1', type: 'myskoda-set', name: 'test set', account: 'cred1', command: 'doesNotExist', wires: [['n2']] },
             { id: 'n2', type: 'helper' },
         ];
 

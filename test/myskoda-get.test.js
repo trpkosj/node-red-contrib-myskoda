@@ -182,7 +182,7 @@ describe('myskoda-get node', () => {
     // ── Loading ──────────────────────────────────────────────────────────────
 
     it('should be loaded with default config', (done) => {
-        const flow = [credConfigNode, { id: 'n1', type: 'myskoda-get', name: 'test get', credentials: 'cred1' }];
+        const flow = [credConfigNode, { id: 'n1', type: 'myskoda-get', name: 'test get', account: 'cred1' }];
         helper.load(nodeTypes, flow, defaultCredentials, () => {
             const n1 = helper.getNode('n1');
             expect(n1).toBeTruthy();
@@ -193,7 +193,7 @@ describe('myskoda-get node', () => {
 
     it('should be loaded with all query options enabled', (done) => {
         const flow = [credConfigNode, {
-            id: 'n1', type: 'myskoda-get', name: 'full query', credentials: 'cred1',
+            id: 'n1', type: 'myskoda-get', name: 'full query', account: 'cred1',
             queryParking: true, queryClimater: true, queryCharger: true, queryMaintenance: true,
         }];
         helper.load(nodeTypes, flow, defaultCredentials, () => {
@@ -215,7 +215,7 @@ describe('myskoda-get node', () => {
 
         const flow = [
             credConfigNode,
-            { id: 'n1', type: 'myskoda-get', name: 'test get', credentials: 'cred1',
+            { id: 'n1', type: 'myskoda-get', name: 'test get', account: 'cred1',
               queryParking: false, queryClimater: false, queryCharger: false, queryMaintenance: false,
               wires: [['n2']] },
             { id: 'n2', type: 'helper' },
@@ -268,7 +268,7 @@ describe('myskoda-get node', () => {
 
         const flow = [
             credConfigNode,
-            { id: 'n1', type: 'myskoda-get', name: 'charger test', credentials: 'cred1',
+            { id: 'n1', type: 'myskoda-get', name: 'charger test', account: 'cred1',
               queryParking: false, queryClimater: false, queryCharger: true, queryMaintenance: false,
               wires: [['n2']] },
             { id: 'n2', type: 'helper' },
@@ -315,7 +315,7 @@ describe('myskoda-get node', () => {
 
         const flow = [
             credConfigNode,
-            { id: 'n1', type: 'myskoda-get', name: 'ac test', credentials: 'cred1',
+            { id: 'n1', type: 'myskoda-get', name: 'ac test', account: 'cred1',
               queryParking: false, queryClimater: true, queryCharger: false, queryMaintenance: false,
               wires: [['n2']] },
             { id: 'n2', type: 'helper' },
@@ -353,7 +353,7 @@ describe('myskoda-get node', () => {
 
         const flow = [
             credConfigNode,
-            { id: 'n1', type: 'myskoda-get', name: 'parking test', credentials: 'cred1',
+            { id: 'n1', type: 'myskoda-get', name: 'parking test', account: 'cred1',
               queryParking: true, queryClimater: false, queryCharger: false, queryMaintenance: false,
               wires: [['n2']] },
             { id: 'n2', type: 'helper' },
@@ -392,7 +392,7 @@ describe('myskoda-get node', () => {
 
         const flow = [
             credConfigNode,
-            { id: 'n1', type: 'myskoda-get', name: 'maintenance test', credentials: 'cred1',
+            { id: 'n1', type: 'myskoda-get', name: 'maintenance test', account: 'cred1',
               queryParking: false, queryClimater: false, queryCharger: false, queryMaintenance: true,
               wires: [['n2']] },
             { id: 'n2', type: 'helper' },
@@ -433,7 +433,7 @@ describe('myskoda-get node', () => {
 
         const flow = [
             credConfigNode,
-            { id: 'n1', type: 'myskoda-get', name: 'full test', credentials: 'cred1',
+            { id: 'n1', type: 'myskoda-get', name: 'full test', account: 'cred1',
               queryParking: true, queryClimater: true, queryCharger: true, queryMaintenance: true,
               wires: [['n2']] },
             { id: 'n2', type: 'helper' },
@@ -471,7 +471,7 @@ describe('myskoda-get node', () => {
 
         const flow = [
             credConfigNode,
-            { id: 'n1', type: 'myskoda-get', name: 'test get', credentials: 'cred1', wires: [['n2']] },
+            { id: 'n1', type: 'myskoda-get', name: 'test get', account: 'cred1', wires: [['n2']] },
             { id: 'n2', type: 'helper' },
         ];
 
@@ -488,7 +488,7 @@ describe('myskoda-get node', () => {
 
         const flow = [
             credConfigNode,
-            { id: 'n1', type: 'myskoda-get', name: 'test get', credentials: 'cred1', wires: [['n2']] },
+            { id: 'n1', type: 'myskoda-get', name: 'test get', account: 'cred1', wires: [['n2']] },
             { id: 'n2', type: 'helper' },
         ];
 
@@ -508,7 +508,7 @@ describe('myskoda-get node', () => {
 
         const flow = [
             credConfigNode,
-            { id: 'n1', type: 'myskoda-get', name: 'test get', credentials: 'cred1',
+            { id: 'n1', type: 'myskoda-get', name: 'test get', account: 'cred1',
               queryParking: false, queryClimater: false, queryCharger: false, queryMaintenance: false,
               wires: [['n2']] },
             { id: 'n2', type: 'helper' },
@@ -545,7 +545,7 @@ describe('myskoda-get node', () => {
 
         const flow = [
             credConfigNode,
-            { id: 'n1', type: 'myskoda-get', name: 'test get', credentials: 'cred1',
+            { id: 'n1', type: 'myskoda-get', name: 'test get', account: 'cred1',
               queryParking: false, queryClimater: false, queryCharger: true, queryMaintenance: false,
               wires: [['n2']] },
             { id: 'n2', type: 'helper' },
@@ -582,7 +582,7 @@ describe('myskoda-get node', () => {
 
         const flow = [
             credConfigNode,
-            { id: 'n1', type: 'myskoda-get', name: 'detail test', credentials: 'cred1',
+            { id: 'n1', type: 'myskoda-get', name: 'detail test', account: 'cred1',
               queryParking: false, queryClimater: false, queryCharger: false, queryMaintenance: false,
               wires: [['n2']] },
             { id: 'n2', type: 'helper' },

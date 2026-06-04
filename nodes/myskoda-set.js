@@ -7,7 +7,7 @@ module.exports = function (RED) {
 
         node.on('input', async function (msg, send, done) {
             try {
-                var credentialsNode = RED.nodes.getNode(config.credentials);
+                var credentialsNode = RED.nodes.getNode(config.account);
                 var credentials = credentialsNode ? credentialsNode.credentials : this.credentials;
 
                 if (!credentials || !credentials.email || !credentials.password) {

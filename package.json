@@ -1,6 +1,6 @@
 {
     "name": "node-red-contrib-myskoda",
-    "version": "2.2.0",
+    "version": "2.2.1",
     "description": "Node-RED nodes for interacting with MySkoda (formerly Skoda Connect)",
     "author": "Jiri Trpkos <https://github.com/trpkosj>",
     "license": "MIT",
