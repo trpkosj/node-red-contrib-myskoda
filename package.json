@@ -1,6 +1,6 @@
 {
     "name": "node-red-contrib-myskoda",
-    "version": "2.1.0",
+    "version": "2.2.0",
     "description": "Node-RED nodes for interacting with MySkoda (formerly Skoda Connect)",
     "author": "Jiri Trpkos <https://github.com/trpkosj>",
     "license": "MIT",
@@ -17,6 +17,7 @@
     ],
     "node-red": {
         "nodes": {
+            "myskoda-credentials": "nodes/myskoda-credentials.js",
             "myskoda-get": "nodes/myskoda-get.js",
             "myskoda-set": "nodes/myskoda-set.js"
         }
@@ -38,9 +39,9 @@
         "jsdom": "^24.0.0"
     },
     "devDependencies": {
-        "jest": "^29.7.0",
-        "axios-mock-adapter": "^1.22.0",
-        "node-red": "^3.1.0",
+        "jest": "^30.0.0",
+        "axios-mock-adapter": "^2.1.0",
+        "node-red": "^4.0.0",
         "node-red-node-test-helper": "^0.3.4"
     }
 }

@@ -4,6 +4,7 @@
         color: '#4aa82e',
         defaults: {
             name: {value:""},
+            credentials: {value:"", type:"myskoda-credentials"},
             queryParking:{
                 value: false,
                 required: false
@@ -26,42 +27,34 @@
         icon: "arrow-in.svg",
         label: function() {
             return this.name||"myskoda-get";
-        },
-        credentials: {
-            email: { type: "text" },
-            password: { type: "password" }
         }
     });
 </script>
 
 <script type="text/x-red" data-template-name="myskoda-get">
     <div class="form-row">
-        <label for="node-input-name"><i class="icon-tag"></i> Name</label>
+        <label for="node-input-name"><i class="fa fa-tag"></i> Name</label>
         <input type="text" id="node-input-name" placeholder="Name">
     </div>
     <div class="form-row">
-        <label for="node-input-email"><i class="icon-tag"></i> Email</label>
-        <input type="text" id="node-input-email">
-    </div>
-    <div class="form-row">
-        <label for="node-input-password"><i class="icon-tag"></i> Password</label>
-        <input type="password" id="node-input-password">
+        <label for="node-input-credentials"><i class="fa fa-user"></i> Account</label>
+        <input type="text" id="node-input-credentials">
     </div>
 
     <div class="form-row">
-        <label for="node-input-queryParking"><i class="icon-tag"></i> Query parking position</label>
+        <label for="node-input-queryParking"><i class="fa fa-map-marker"></i> Query parking position</label>
         <input type="checkbox" id="node-input-queryParking">
     </div>
     <div class="form-row">
-        <label for="node-input-queryClimater"><i class="icon-tag"></i> Query air conditioning</label>
+        <label for="node-input-queryClimater"><i class="fa fa-snowflake-o"></i> Query air conditioning</label>
         <input type="checkbox" id="node-input-queryClimater">
     </div>
     <div class="form-row">
-        <label for="node-input-queryCharger"><i class="icon-tag"></i> Query charging information</label>
+        <label for="node-input-queryCharger"><i class="fa fa-bolt"></i> Query charging information</label>
         <input type="checkbox" id="node-input-queryCharger">
     </div>
     <div class="form-row">
-        <label for="node-input-queryMaintenance"><i class="icon-tag"></i> Query maintenance information</label>
+        <label for="node-input-queryMaintenance"><i class="fa fa-wrench"></i> Query maintenance information</label>
         <input type="checkbox" id="node-input-queryMaintenance">
     </div>
 </script>
@@ -74,11 +67,8 @@
         <dt class="optional">Name<span class="property-type">string</span></dt>
         <dd>name of node</dd>
 
-        <dt class="required">Email<span class="property-type">string</span></dt>
-        <dd>Email of your MySkoda account</dd>
-
-        <dt class="required">Password<span class="property-type">string</span></dt>
-        <dd>Password of your MySkoda account</dd>
+        <dt class="required">Account<span class="property-type">myskoda-credentials</span></dt>
+        <dd>MySkoda account credentials (shared config node)</dd>
 
         <dt class="optional">Query parking position<span class="property-type">boolean</span></dt>
         <dd>include last known parking position</dd>

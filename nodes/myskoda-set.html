@@ -4,6 +4,7 @@
         color: '#4aa82e',
         defaults: {
             name: {value:""},
+            credentials: {value:"", type:"myskoda-credentials"},
             command:{
                 value: "startAC",
                 required: true
@@ -14,29 +15,21 @@
         icon: "arrow-in.svg",
         label: function() {
             return this.name||"myskoda-set";
-        },
-        credentials: {
-            email: { type: "text" },
-            password: { type: "password" }
         }
     });
 </script>
 
 <script type="text/x-red" data-template-name="myskoda-set">
     <div class="form-row">
-        <label for="node-input-name"><i class="icon-tag"></i> Name</label>
+        <label for="node-input-name"><i class="fa fa-tag"></i> Name</label>
         <input type="text" id="node-input-name" placeholder="Name">
     </div>
     <div class="form-row">
-        <label for="node-input-email"><i class="icon-tag"></i> Email</label>
-        <input type="text" id="node-input-email">
+        <label for="node-input-credentials"><i class="fa fa-user"></i> Account</label>
+        <input type="text" id="node-input-credentials">
     </div>
     <div class="form-row">
-        <label for="node-input-password"><i class="icon-tag"></i> Password</label>
-        <input type="password" id="node-input-password">
-    </div>
-    <div class="form-row">
-        <label for="node-input-command"><i class="icon-tag"></i> Command</label>
+        <label for="node-input-command"><i class="fa fa-cog"></i> Command</label>
         <select id="node-input-command">
             <option value="startAC">Start Air Conditioning</option>
             <option value="stopAC">Stop Air Conditioning</option>
@@ -63,11 +56,8 @@
         <dt class="optional">Name<span class="property-type">string</span></dt>
         <dd>name of node</dd>
 
-        <dt class="required">Email<span class="property-type">string</span></dt>
-        <dd>Email of your MySkoda account</dd>
-
-        <dt class="required">Password<span class="property-type">string</span></dt>
-        <dd>Password of your MySkoda account</dd>
+        <dt class="required">Account<span class="property-type">myskoda-credentials</span></dt>
+        <dd>MySkoda account credentials (shared config node)</dd>
 
         <dt class="required">Command<span class="property-type">string</span></dt>
         <dd>Choose a command from the list</dd>

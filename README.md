@@ -10,6 +10,8 @@
 
 Simple nodes for getting car information from the **MySkoda** platform and sending remote commands to your vehicle.
 
+> **v2.2.0** - Shared credentials via config node (enter email/password once, use in all nodes). Includes complete example flow with all operations.
+>
 > **v2.0.0** - Complete rewrite using the new MySkoda API (replaces the legacy Skoda Connect / VW Group API that stopped working). All Skoda vehicles supported by the MySkoda app are compatible.
 
 ## Requirements
@@ -25,9 +27,15 @@ cd ~/.node-red
 npm install node-red-contrib-myskoda
 ```
 
+## Configuration
+
+1. Add any **myskoda-get** or **myskoda-set** node to your flow
+2. In the node config, click the pencil icon next to **Account** to create a new **MySkoda Account** config node
+3. Enter your MySkoda email and password once — all nodes sharing the same config will use these credentials
+
 ## Usage: myskoda-get node
 
-Enter your MySkoda email and password. Any input triggers the API call. Output is a JSON object with information for each vehicle in your account.
+Select your MySkoda Account. Any input triggers the API call. Output is a JSON object with information for each vehicle in your account.
 
 **Always returned:**
 - Vehicle info (model, nickname, connectivity generation)
@@ -59,9 +67,14 @@ Enter your MySkoda email and password. Any input triggers the API call. Output i
 }
 ```
 
+## Example flow
+
+A complete example flow with all operations is included. Import it via:
+**Menu → Import → Examples → node-red-contrib-myskoda → complete-flow**
+
 ## Usage: myskoda-set node
 
-Enter your MySkoda email and password. Select a command from the dropdown. Each command requires `msg.vin` with the vehicle VIN.
+Select your MySkoda Account and a command from the dropdown. Each command requires `msg.vin` with the vehicle VIN.
 
 ### Available commands
 
