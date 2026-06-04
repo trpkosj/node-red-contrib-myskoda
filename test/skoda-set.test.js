@@ -1,11 +1,11 @@
 const helper = require('node-red-node-test-helper');
 const axios = require('axios');
 const MockAdapter = require('axios-mock-adapter');
-const skodaSetNode = require('../nodes/skoda-set.js');
+const skodaSetNode = require('../nodes/myskoda-set.js');
 
 helper.init(require.resolve('node-red'));
 
-describe('skoda-set node', () => {
+describe('myskoda-set node', () => {
     let mock;
 
     beforeEach((done) => {
@@ -20,7 +20,7 @@ describe('skoda-set node', () => {
     });
 
     it('should be loaded', (done) => {
-        const flow = [{ id: 'n1', type: 'skoda-set', name: 'test set', command: 'startAC' }];
+        const flow = [{ id: 'n1', type: 'myskoda-set', name: 'test set', command: 'startAC' }];
         helper.load(skodaSetNode, flow, () => {
             const n1 = helper.getNode('n1');
             expect(n1).toBeTruthy();
@@ -53,7 +53,7 @@ describe('skoda-set node', () => {
         });
 
         const flow = [
-            { id: 'n1', type: 'skoda-set', name: 'test set', command: 'startAC', wires: [['n2']] },
+            { id: 'n1', type: 'myskoda-set', name: 'test set', command: 'startAC', wires: [['n2']] },
             { id: 'n2', type: 'helper' },
         ];
         const credentials = { n1: { email: 'test@test.com', password: 'pass123' } };
@@ -102,7 +102,7 @@ describe('skoda-set node', () => {
         mock.onPost(/air-conditioning\/VIN123\/start/).reply(200, { status: 'accepted' });
 
         const flow = [
-            { id: 'n1', type: 'skoda-set', name: 'test set', command: 'startAC', wires: [['n2']] },
+            { id: 'n1', type: 'myskoda-set', name: 'test set', command: 'startAC', wires: [['n2']] },
             { id: 'n2', type: 'helper' },
         ];
         const credentials = { n1: { email: 'test@test.com', password: 'pass123' } };
@@ -148,7 +148,7 @@ describe('skoda-set node', () => {
         });
 
         const flow = [
-            { id: 'n1', type: 'skoda-set', name: 'test set', command: 'temperature', wires: [['n2']] },
+            { id: 'n1', type: 'myskoda-set', name: 'test set', command: 'temperature', wires: [['n2']] },
             { id: 'n2', type: 'helper' },
         ];
         const credentials = { n1: { email: 'test@test.com', password: 'pass123' } };
@@ -192,7 +192,7 @@ describe('skoda-set node', () => {
         });
 
         const flow = [
-            { id: 'n1', type: 'skoda-set', name: 'test set', command: 'lock', wires: [['n2']] },
+            { id: 'n1', type: 'myskoda-set', name: 'test set', command: 'lock', wires: [['n2']] },
             { id: 'n2', type: 'helper' },
         ];
         const credentials = { n1: { email: 'test@test.com', password: 'pass123' } };

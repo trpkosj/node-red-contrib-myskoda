@@ -1,11 +1,11 @@
 const helper = require('node-red-node-test-helper');
 const axios = require('axios');
 const MockAdapter = require('axios-mock-adapter');
-const skodaGetNode = require('../nodes/skoda-get.js');
+const skodaGetNode = require('../nodes/myskoda-get.js');
 
 helper.init(require.resolve('node-red'));
 
-describe('skoda-get node', () => {
+describe('myskoda-get node', () => {
     let mock;
 
     beforeEach((done) => {
@@ -20,7 +20,7 @@ describe('skoda-get node', () => {
     });
 
     it('should be loaded', (done) => {
-        const flow = [{ id: 'n1', type: 'skoda-get', name: 'test get' }];
+        const flow = [{ id: 'n1', type: 'myskoda-get', name: 'test get' }];
         helper.load(skodaGetNode, flow, () => {
             const n1 = helper.getNode('n1');
             expect(n1).toBeTruthy();
@@ -81,7 +81,7 @@ describe('skoda-get node', () => {
         });
 
         const flow = [
-            { id: 'n1', type: 'skoda-get', name: 'test get', wires: [['n2']] },
+            { id: 'n1', type: 'myskoda-get', name: 'test get', wires: [['n2']] },
             { id: 'n2', type: 'helper' },
         ];
         const credentials = { n1: { email: 'test@test.com', password: 'pass123' } };
@@ -113,7 +113,7 @@ describe('skoda-get node', () => {
         mock.onGet(/identity\.vwgroup\.io/).reply(500);
 
         const flow = [
-            { id: 'n1', type: 'skoda-get', name: 'test get', wires: [['n2']] },
+            { id: 'n1', type: 'myskoda-get', name: 'test get', wires: [['n2']] },
             { id: 'n2', type: 'helper' },
         ];
         const credentials = { n1: { email: 'test@test.com', password: 'pass123' } };

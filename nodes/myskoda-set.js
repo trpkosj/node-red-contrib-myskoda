@@ -97,7 +97,7 @@ module.exports = function (RED) {
         });
     }
 
-    RED.nodes.registerType("skoda-set", SkodaConnectNodeSet, {
+    RED.nodes.registerType("myskoda-set", SkodaConnectNodeSet, {
         credentials: {
             email: { type: "text" },
             password: { type: "password" }

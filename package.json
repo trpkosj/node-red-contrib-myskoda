@@ -1,6 +1,6 @@
 {
     "name": "node-red-contrib-myskoda",
-    "version": "2.0.7",
+    "version": "2.1.0",
     "description": "Node-RED nodes for interacting with MySkoda (formerly Skoda Connect)",
     "author": "Jiri Trpkos <https://github.com/trpkosj>",
     "license": "MIT",
@@ -17,8 +17,8 @@
     ],
     "node-red": {
         "nodes": {
-            "skoda-get": "nodes/skoda-get.js",
-            "skoda-set": "nodes/skoda-set.js"
+            "myskoda-get": "nodes/myskoda-get.js",
+            "myskoda-set": "nodes/myskoda-set.js"
         }
     },
     "files": [

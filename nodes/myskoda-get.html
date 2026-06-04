@@ -1,5 +1,5 @@
 <script type="text/javascript">
-    RED.nodes.registerType('skoda-get',{
+    RED.nodes.registerType('myskoda-get',{
         category: 'car',
         color: '#4aa82e',
         defaults: {
@@ -25,7 +25,7 @@
         outputs:1,
         icon: "arrow-in.svg",
         label: function() {
-            return this.name||"skoda-get";
+            return this.name||"myskoda-get";
         },
         credentials: {
             email: { type: "text" },
@@ -34,7 +34,7 @@
     });
 </script>
 
-<script type="text/x-red" data-template-name="skoda-get">
+<script type="text/x-red" data-template-name="myskoda-get">
     <div class="form-row">
         <label for="node-input-name"><i class="icon-tag"></i> Name</label>
         <input type="text" id="node-input-name" placeholder="Name">
@@ -66,7 +66,7 @@
     </div>
 </script>
 
-<script type="text/x-red" data-help-name="skoda-get">
+<script type="text/x-red" data-help-name="myskoda-get">
     <p>A node to log in to MySkoda service and get vehicle data</p>
 
     <h3>Configuration</h3>

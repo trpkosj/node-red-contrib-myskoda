@@ -1,5 +1,5 @@
 <script type="text/javascript">
-    RED.nodes.registerType('skoda-set',{
+    RED.nodes.registerType('myskoda-set',{
         category: 'car',
         color: '#4aa82e',
         defaults: {
@@ -13,7 +13,7 @@
         outputs:1,
         icon: "arrow-in.svg",
         label: function() {
-            return this.name||"skoda-set";
+            return this.name||"myskoda-set";
         },
         credentials: {
             email: { type: "text" },
@@ -22,7 +22,7 @@
     });
 </script>
 
-<script type="text/x-red" data-template-name="skoda-set">
+<script type="text/x-red" data-template-name="myskoda-set">
     <div class="form-row">
         <label for="node-input-name"><i class="icon-tag"></i> Name</label>
         <input type="text" id="node-input-name" placeholder="Name">
@@ -55,7 +55,7 @@
     </div>
 </script>
 
-<script type="text/x-red" data-help-name="skoda-set">
+<script type="text/x-red" data-help-name="myskoda-set">
     <p>A node to log in to MySkoda and send commands to your vehicle</p>
 
     <h3>Configuration</h3>
@@ -76,7 +76,7 @@
     <h3>Inputs</h3>
     <dl class="message-properties">
         <dt class="required">msg.vin<span class="property-type">string</span></dt>
-        <dd>VIN number of car. Use the skoda-get node to query it.</dd>
+        <dd>VIN number of car. Use the myskoda-get node to query it.</dd>
 
         <dt class="optional">msg.payload<span class="property-type">number</span></dt>
         <dd>For "Set Target Temperature": temperature in Celsius (e.g. 21.5)<br/>

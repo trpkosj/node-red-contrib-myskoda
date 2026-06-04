@@ -25,7 +25,7 @@ cd ~/.node-red
 npm install node-red-contrib-myskoda
 ```
 
-## Usage: skoda-get node
+## Usage: myskoda-get node
 
 Enter your MySkoda email and password. Any input triggers the API call. Output is a JSON object with information for each vehicle in your account.
 
@@ -59,7 +59,7 @@ Enter your MySkoda email and password. Any input triggers the API call. Output i
 }
 ```
 
-## Usage: skoda-set node
+## Usage: myskoda-set node
 
 Enter your MySkoda email and password. Select a command from the dropdown. Each command requires `msg.vin` with the vehicle VIN.
 
